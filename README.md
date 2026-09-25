@@ -4,83 +4,63 @@
 
 ## Eesmärk
 
-Süsteem aitab ettevõttel hallata projekte, ülesandeid, töötunde ja faile.
+Süsteem aitab hallata projekte, ülesandeid, töötunde ja faile.
 
 Süsteemi saavad kasutada ainult sisse loginud kasutajad.
 
----
-
 ## Kasutaja
 
-Kasutaja on süsteemi kasutav töötaja.
-
-Andmed:
+Kasutaja andmed:
 - nimi
 - email
 - parool
 
-Kasutaja saab olla projekti liige, ülesande vastutaja ja töölogi teostaja.
-
----
+Kasutaja saab olla projektis, vastutada ülesande eest ja lisada tööaega.
 
 ## Projekt
 
 Projekt sisaldab:
-
-- projekti nime
+- nime
 - alguskuupäeva
 - tähtaega
 - eelarvet
 - tunnihinda
-- projekti meeskonda
+- töötajaid
 
 Projektile saab lisada ülesandeid.
 
-`ArvutaMaksumus()` arvutab projekti senise maksumuse.
-
----
+`ArvutaMaksumus()` arvutab, kui palju raha on projektile kulunud.
 
 ## Ülesanne
 
 Ülesanne sisaldab:
-
 - pealkirja
 - alguskuupäeva
-- eeldatavat ajakulu
+- arvatavat ajakulu
 - kirjeldust
-- infot, kas ülesanne on valmis
-- fikseeritud hinda
+- kas töö on valmis
+- kindlat hinda
 
 Ülesandel on vastutaja.
 
-Ülesandele saab lisada:
-- töölogisid
-- faile
-
----
+Ülesande juurde saab lisada tööaega ja faile.
 
 ## TööLogi
 
-Töölogi näitab, kui palju aega ülesandele kulus.
+Töölogi näitab, kui palju aega töö peale kulus.
 
 Andmed:
 - kuupäev
 - ajakulu
 - kirjeldus
-- teostaja
-
----
+- töötaja
 
 ## Fail
-
-Ülesande juurde saab lisada faile.
 
 Faili andmed:
 - faili nimi
 - faili asukoht
 - üleslaadimise aeg
-
----
 
 ## Seosed
 
@@ -91,12 +71,8 @@ Faili andmed:
 - Kasutaja → TööLogi
 - Ülesanne → Fail
 
----
+## Maksumus
 
-## Maksumuse arvutamine
-
-Kui ülesandel pole fikseeritud hinda:
+Kui ülesandel pole kindlat hinda:
 
 ```text
-Maksumus = töötunnid × tunnihind
-Ülesande maksumus = tegelik ajakulu × projekti tunnihind
