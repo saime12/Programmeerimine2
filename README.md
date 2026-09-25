@@ -76,3 +76,4 @@ Faili andmed:
 Kui ülesandel pole kindlat hinda:
 
 ```text
+Maksumus = töötunnid × tunnihind
