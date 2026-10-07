@@ -1,5 +1,6 @@
 # Daniel Ohtra
 <img width="728" height="734" alt="image" src="https://github.com/user-attachments/assets/18ad0294-dade-4c3f-b531-fad07b1d5609" />
+
 # Tööde haldamise süsteem
 
 ## Eesmärk
