@@ -47,8 +47,6 @@ namespace KooliProjekt.WebAPI
                 var dbContext =
                     scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-                dbContext.Database.Migrate();
-
                 SeedData.Initialize(dbContext);
             }
 
@@ -61,14 +59,6 @@ namespace KooliProjekt.WebAPI
             app.UseAuthorization();
 
             app.MapControllers();
-
-            using (var scope = app.Services.CreateScope())
-            {
-                var context = scope.ServiceProvider
-                    .GetRequiredService<ApplicationDbContext>();
-
-                SeedData.Initialize(context);
-            }
 
             app.Run();
         }
