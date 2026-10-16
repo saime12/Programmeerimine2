@@ -31,23 +31,10 @@ namespace KooliProjekt.Application.Data
                 });
             }
 
-            // PROJECT TASKS
-            if (!context.ProjectTasks.Any())
-            {
-                context.ProjectTasks.Add(new ProjectTask
-                {
-                    Title = "Test Task",
-                    StartDate = DateTime.Now,
-                    EstimatedTime = TimeSpan.FromHours(5),
-                    Description = "Test task description",
-                    IsCompleted = false,
-                    FixedPrice = 100
-                });
-            }
 
             // WORK LOGS
             if (!context.WorkLogs.Any())
-            {
+                {
                 context.WorkLogs.Add(new WorkLog
                 {
                     Date = DateTime.Now,
@@ -58,7 +45,7 @@ namespace KooliProjekt.Application.Data
 
             // PROJECT FILES
             if (!context.ProjectFiles.Any())
-            {
+                {
                 context.ProjectFiles.Add(new ProjectFile
                 {
                     FileName = "test.txt",
