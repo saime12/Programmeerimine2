@@ -18,5 +18,6 @@ namespace KooliProjekt.Application.Data
         public DbSet<ProjectTask> ProjectTasks { get; set; }
         public DbSet<WorkLog> WorkLogs { get; set; }
         public DbSet<ProjectFile> ProjectFiles { get; set; }
+
     }
 }
