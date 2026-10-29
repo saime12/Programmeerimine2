@@ -7,7 +7,7 @@ namespace KooliProjekt.Application.Data
 {
     public class Project
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(100)]

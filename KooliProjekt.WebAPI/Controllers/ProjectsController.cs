@@ -1,4 +1,4 @@
-﻿using KooliProjekt.Application.Features.Projects;
+using KooliProjekt.Application.Features.Projects;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -15,11 +15,15 @@ namespace KooliProjekt.WebAPI.Controllers
         }
 
         [HttpGet("list")]
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
-            var result = await _mediator.Send(new ListProjectsQuery());
+            var result = await _mediator.Send(new ListProjectsQuery
+            {
+                Page = page,
+                PageSize = pageSize
+            });
 
-            return Ok(result);
+            return Result(result);
         }
 
         [HttpGet("get/{id}")]
@@ -35,12 +39,7 @@ namespace KooliProjekt.WebAPI.Controllers
                 Id = id.Value
             });
 
-            if (result == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(result);
+            return Result(result);
         }
     }
 }
