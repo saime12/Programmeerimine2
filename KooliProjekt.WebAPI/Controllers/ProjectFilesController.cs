@@ -1,8 +1,11 @@
+
+using System.IO;
+using System.Threading.Tasks;
 using KooliProjekt.Application.Features.ProjectFiles;
 using MediatR;
-using KooliProjekt.Application.Features.Projects;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+using KooliProjekt.WebAPI.Models;
 
 namespace KooliProjekt.WebAPI.Controllers
 {
@@ -16,7 +19,9 @@ namespace KooliProjekt.WebAPI.Controllers
         }
 
         [HttpGet("list")]
-        public async Task<IActionResult> List([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public async Task<IActionResult> List(
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 10)
         {
             var result = await _mediator.Send(new ListProjectFilesQuery
             {
@@ -42,12 +47,31 @@ namespace KooliProjekt.WebAPI.Controllers
 
             return Result(result);
         }
+
+
         [HttpPost("save")]
-        public async Task<IActionResult> Save([FromBody] SaveProjectFileCommand command)
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> Save(
+            [FromForm] UploadProjectFileRequest request)
         {
-            var result = await _mediator.Send(command);
-            return Result(result);
+            if (request.File == null || request.File.Length == 0)
+            {
+                return BadRequest("Palun vali fail.");
+            }
+
+            using (var stream = request.File.OpenReadStream())
+            {
+                var result = await _mediator.Send(new SaveProjectFileCommand
+                {
+                    ProjectTaskId = request.ProjectTaskId,
+                    FileName = request.File.FileName,
+                    InputStream = stream
+                });
+
+                return Result(result);
+            }
         }
+
 
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> Delete(int id)

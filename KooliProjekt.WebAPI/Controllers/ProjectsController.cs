@@ -1,6 +1,5 @@
 using KooliProjekt.Application.Features.Projects;
 using MediatR;
-using KooliProjekt.Application.Features.Projects;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

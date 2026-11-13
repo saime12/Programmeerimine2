@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using KooliProjekt.Application.Infrastructure.Files;
 
 namespace KooliProjekt.WebAPI
 {
@@ -17,6 +18,11 @@ namespace KooliProjekt.WebAPI
 
             var connectionString =
                 builder.Configuration.GetConnectionString("DefaultConnection");
+
+            var filesRoot = builder.Configuration["FilesRoot"];
+            var fileClient = new LocalFileClient(filesRoot);
+
+            builder.Services.AddSingleton<IFileClient>(fileClient);
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
