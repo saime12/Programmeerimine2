@@ -22,5 +22,6 @@ namespace KooliProjekt.Application.Data
         [Required]
         [MaxLength(100)]
         public string Password { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }

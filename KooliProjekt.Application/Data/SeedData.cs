@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KooliProjekt.Application.Authentication;
+using System;
 using System.Linq;
 
 namespace KooliProjekt.Application.Data
@@ -8,13 +9,25 @@ namespace KooliProjekt.Application.Data
         public static void Initialize(ApplicationDbContext context)
         {
             // USERS
-            if (!context.Users.Any())
+            if (!context.Users.Any(u => u.Email == "admin@test.ee"))
             {
                 context.Users.Add(new User
                 {
-                    Name = "Test User",
-                    Email = "test@test.ee",
-                    Password = "Test123!"
+                    Name = "Admin User",
+                    Email = "admin@test.ee",
+                    Password = PasswordHelper.Hash("Admin123!"),
+                    IsAdmin = true
+                });
+            }
+
+            if (!context.Users.Any(u => u.Email == "user@test.ee"))
+            {
+                context.Users.Add(new User
+                {
+                    Name = "Normal User",
+                    Email = "user@test.ee",
+                    Password = PasswordHelper.Hash("User123!"),
+                    IsAdmin = false
                 });
             }
 

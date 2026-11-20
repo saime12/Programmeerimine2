@@ -24,11 +24,11 @@ namespace KooliProjekt.Application.Migrations
 
             modelBuilder.Entity("KooliProjekt.Application.Data.Project", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<decimal>("Budget")
                         .HasColumnType("decimal(18,2)");
@@ -47,7 +47,7 @@ namespace KooliProjekt.Application.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Projects");
                 });
@@ -70,7 +70,7 @@ namespace KooliProjekt.Application.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<int?>("ProjectTaskid")
+                    b.Property<int?>("ProjectTaskId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UploadTime")
@@ -78,18 +78,18 @@ namespace KooliProjekt.Application.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjectTaskid");
+                    b.HasIndex("ProjectTaskId");
 
                     b.ToTable("ProjectFiles");
                 });
 
             modelBuilder.Entity("KooliProjekt.Application.Data.ProjectTask", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .HasMaxLength(1000)
@@ -104,7 +104,7 @@ namespace KooliProjekt.Application.Migrations
                     b.Property<bool>("IsCompleted")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("Projectid")
+                    b.Property<int?>("ProjectId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("StartDate")
@@ -115,9 +115,9 @@ namespace KooliProjekt.Application.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("Projectid");
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("ProjectTasks");
                 });
@@ -134,6 +134,9 @@ namespace KooliProjekt.Application.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -166,7 +169,7 @@ namespace KooliProjekt.Application.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
-                    b.Property<int?>("ProjectTaskid")
+                    b.Property<int?>("ProjectTaskId")
                         .HasColumnType("int");
 
                     b.Property<double>("TimeSpent")
@@ -174,7 +177,7 @@ namespace KooliProjekt.Application.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjectTaskid");
+                    b.HasIndex("ProjectTaskId");
 
                     b.ToTable("WorkLogs");
                 });
@@ -183,21 +186,21 @@ namespace KooliProjekt.Application.Migrations
                 {
                     b.HasOne("KooliProjekt.Application.Data.ProjectTask", null)
                         .WithMany("Files")
-                        .HasForeignKey("ProjectTaskid");
+                        .HasForeignKey("ProjectTaskId");
                 });
 
             modelBuilder.Entity("KooliProjekt.Application.Data.ProjectTask", b =>
                 {
                     b.HasOne("KooliProjekt.Application.Data.Project", null)
                         .WithMany("Tasks")
-                        .HasForeignKey("Projectid");
+                        .HasForeignKey("ProjectId");
                 });
 
             modelBuilder.Entity("KooliProjekt.Application.Data.WorkLog", b =>
                 {
                     b.HasOne("KooliProjekt.Application.Data.ProjectTask", null)
                         .WithMany("WorkLogs")
-                        .HasForeignKey("ProjectTaskid");
+                        .HasForeignKey("ProjectTaskId");
                 });
 
             modelBuilder.Entity("KooliProjekt.Application.Data.Project", b =>

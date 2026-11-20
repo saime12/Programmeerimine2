@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using KooliProjekt.Application.Infrastructure.Files;
+using KooliProjekt.Application.Authentication.Jwt;
+using KooliProjekt.Application.Infrastructure;
 
 namespace KooliProjekt.WebAPI
 {
@@ -30,6 +32,13 @@ namespace KooliProjekt.WebAPI
             });
 
             builder.Services.AddControllers();
+
+            builder.Services.AddSingleton<JwtSettings>();
+builder.Services.AddSingleton<JwtTokenBuilder>();
+
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddScoped<IUserProvider, WebUserProvider>();
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
